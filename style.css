@@ -57,7 +57,8 @@ nav a {
     font-weight: 600;
     transition: all 0.3s ease;
     position: relative;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
 }
 
 nav a::after {
