@@ -119,3 +119,38 @@ footer h2 {
     font-size: 1rem;
     color: #c77dff;
 }
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-section {
+    margin-bottom: 1.5rem;
+}
+
+.contact-section h2 {
+    color: #c77dff;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.contact-section ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.contact-section a {
+    color: #e0aaff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.contact-section a:hover {
+    color: #c77dff;
+    transform: translateY(-2px);
+}
