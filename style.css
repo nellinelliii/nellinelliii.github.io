@@ -82,13 +82,15 @@ nav a:hover::after {
 .content {
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 3rem;
+    padding: 4rem;
     background: rgba(20, 10, 40, 0.6);
     border-radius: 12px;
     border: 1px solid rgba(157, 78, 221, 0.3);
     box-shadow: 0 8px 32px rgba(157, 78, 221, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    flex: 1;
+    flex: 1 0 auto;
     backdrop-filter: blur(10px);
+    min-height: 500px;
+    width: 90%;
 }
 
 .content h2 {
@@ -109,10 +111,11 @@ footer {
     background-color: #0a0a0a;
     color: #e0e0e0;
     text-align: center;
-    padding: 2rem;
-    margin-top: 2rem;
+    padding: 3rem 2rem;
+    margin-top: auto;
     border-top: 2px solid #9d4edd;
     box-shadow: 0 -4px 15px rgba(157, 78, 221, 0.15);
+    width: 100%;
 }
 
 footer h2 {
