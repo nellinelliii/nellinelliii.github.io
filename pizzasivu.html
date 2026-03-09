@@ -46,6 +46,12 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
+        }
+
+        nav li {
+            display: flex;
+            align-items: center;
         }
 
         nav a {
@@ -627,19 +633,21 @@
 
         /* Order History Styles */
         .order-history-btn {
-            background: white;
-            color: #d32f2f;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            border: 2px solid white;
+            background: none;
+            color: white;
+            padding: 0;
+            border-radius: 0;
+            border: none;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            margin-left: 1rem;
+            font-weight: normal;
+            transition: opacity 0.3s;
+            margin-left: 0;
+            font-size: 1rem;
+            font-family: inherit;
         }
 
         .order-history-btn:hover {
-            background: transparent;
+            opacity: 0.8;
             color: white;
         }
 
