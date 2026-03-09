@@ -444,6 +444,179 @@
             font-weight: bold;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 1rem;
+        }
+
+        .modal-header h2 {
+            color: #d32f2f;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #d32f2f;
+        }
+
+        .ingredients-section {
+            margin: 1.5rem 0;
+        }
+
+        .ingredients-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredient-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            background: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .ingredient-checkbox:hover {
+            background: #f0f0f0;
+            border-color: #d32f2f;
+        }
+
+        .ingredient-checkbox input[type="checkbox"] {
+            margin-right: 0.5rem;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .ingredient-checkbox input[type="checkbox"]:checked + label {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .ingredient-checkbox.selected {
+            background: #ffe0e0;
+            border-color: #d32f2f;
+        }
+
+        .ingredient-name {
+            cursor: pointer;
+            flex: 1;
+            margin: 0;
+        }
+
+        .custom-price-info {
+            background: #f0f7ff;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border-left: 4px solid #d32f2f;
+        }
+
+        .custom-price-info p {
+            margin: 0.5rem 0;
+            color: #333;
+        }
+
+        .base-price {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .total-custom-price {
+            font-size: 1.5rem;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .modal-btn-cancel {
+            background: #eee;
+            color: #333;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #ddd;
+        }
+
+        .modal-btn-add {
+            background: #d32f2f;
+            color: white;
+        }
+
+        .modal-btn-add:hover {
+            background: #b71c1c;
+        }
+
+        .modal-btn-add:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
         /* Footer */
         footer {
             background: #222;
@@ -555,6 +728,15 @@
                     <div class="price">€10.49</div>
                     <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="addToCart('Hawaiian', '10.49')">Lisää koriin</button>
                 </div>
+
+                <!-- Custom Pizza -->
+                <div class="menu-item">
+                    <img src="https://via.placeholder.com/250x200?text=Oma+Pizza" alt="Oma Pizza">
+                    <h3>🎨 Oma Pizza</h3>
+                    <p>Valitse omat aineosat ja luo täydellinen pizza</p>
+                    <div class="price">Alkaen €8.99</div>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="openCustomPizzaModal()">Mukauta</button>
+                </div>
             </div>
         </div>
     </section>
@@ -613,6 +795,47 @@
             </form>
         </div>
     </section>
+
+    <!-- Custom Pizza Modal -->
+    <div id="customPizzaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎨 Luo Oma Pizza</h2>
+                <button class="modal-close" onclick="closeCustomPizzaModal()">✕</button>
+            </div>
+
+            <div class="custom-price-info">
+                <p class="base-price">Pohja (tomaatti, mozzarella): €8.99</p>
+                <p style="font-size: 0.9rem; color: #999;">+ €0.50 per lisäaineos</p>
+                <p class="total-custom-price" id="customPizzaPrice">€8.99</p>
+            </div>
+
+            <div class="ingredients-section">
+                <div class="ingredients-title">🥕 Kasvikset</div>
+                <div class="ingredients-grid" id="vegetablesGrid"></div>
+            </div>
+
+            <div class="ingredients-section">
+                <div class="ingredients-title">🍖 Liha & Kala</div>
+                <div class="ingredients-grid" id="meatGrid"></div>
+            </div>
+
+            <div class="ingredients-section">
+                <div class="ingredients-title">🧀 Juusto</div>
+                <div class="ingredients-grid" id="cheeseGrid"></div>
+            </div>
+
+            <div class="ingredients-section">
+                <div class="ingredients-title">🍌 Muut</div>
+                <div class="ingredients-grid" id="otherGrid"></div>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="modal-btn-cancel" onclick="closeCustomPizzaModal()">Peruuta</button>
+                <button class="modal-btn-add" id="addCustomBtn" onclick="addCustomPizzaToCart()">Lisää koriin</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Shopping Cart Sidebar -->
     <div class="cart-sidebar" id="cartSidebar">
@@ -888,6 +1111,98 @@
             alert('Kiitos viestistäsi! Otamme sinuun pian yhteyttä.');
             event.target.reset();
         }
+
+        // Customizable Pizza System
+        const ingredients = {
+            vegetables: [
+                'Tomaatti', 'Paprika', 'Sipuli', 'Valkosipuli', 'Oliivit', 'Pilpileet',
+                'Parsakaali', 'Maissii', 'Sienet', 'Punasipuli', 'Kasvikset', 'Parmesan'
+            ],
+            meat: [
+                'Pepperoni', 'Salaami', 'Kinkku', 'Bacon', 'Nauta', 'Kana', 'Ankka', 'Maksa'
+            ],
+            cheese: [
+                'Mozzarella', 'Parmesan', 'Gorgonzola', 'Ricotta', 'Feta', 'Camembert'
+            ],
+            other: [
+                'Ananas', 'Basilika', 'Oliivöljy', 'Oregano', 'Chili', 'Pesto'
+            ]
+        };
+
+        let selectedCustomIngredients = [];
+
+        function initializeCustomPizzaIngredients() {
+            renderIngredientsGrid('vegetables', ingredients.vegetables);
+            renderIngredientsGrid('meat', ingredients.meat);
+            renderIngredientsGrid('cheese', ingredients.cheese);
+            renderIngredientsGrid('other', ingredients.other);
+        }
+
+        function renderIngredientsGrid(category, items) {
+            const grid = document.getElementById(category + 'Grid');
+            grid.innerHTML = items.map((item, index) => `
+                <div class="ingredient-checkbox" onclick="toggleIngredient('${category}', '${item}', this)">
+                    <input type="checkbox" id="${category}-${index}">
+                    <label for="${category}-${index}" class="ingredient-name">${item}</label>
+                </div>
+            `).join('');
+        }
+
+        function toggleIngredient(category, name, element) {
+            const index = selectedCustomIngredients.findIndex(i => i.name === name);
+            
+            if (index > -1) {
+                selectedCustomIngredients.splice(index, 1);
+                element.classList.remove('selected');
+            } else {
+                selectedCustomIngredients.push({name: name, category: category});
+                element.classList.add('selected');
+            }
+            
+            updateCustomPizzaPrice();
+        }
+
+        function updateCustomPizzaPrice() {
+            const basePrice = 8.99;
+            const ingredientPrice = selectedCustomIngredients.length * 0.50;
+            const total = basePrice + ingredientPrice;
+            document.getElementById('customPizzaPrice').textContent = '€' + total.toFixed(2);
+        }
+
+        function openCustomPizzaModal() {
+            selectedCustomIngredients = [];
+            initializeCustomPizzaIngredients();
+            updateCustomPizzaPrice();
+            document.getElementById('customPizzaModal').classList.add('active');
+        }
+
+        function closeCustomPizzaModal() {
+            document.getElementById('customPizzaModal').classList.remove('active');
+        }
+
+        function addCustomPizzaToCart() {
+            if (selectedCustomIngredients.length === 0) {
+                alert('Valitse vähintään yksi aineos');
+                return;
+            }
+
+            const basePrice = 8.99;
+            const ingredientPrice = selectedCustomIngredients.length * 0.50;
+            const totalPrice = basePrice + ingredientPrice;
+
+            const pizzaName = '🎨 Oma Pizza (' + selectedCustomIngredients.map(i => i.name).join(', ') + ')';
+
+            addToCart(pizzaName, totalPrice.toFixed(2));
+            closeCustomPizzaModal();
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('customPizzaModal');
+            if (event.target === modal) {
+                closeCustomPizzaModal();
+            }
+        });
     </script>
 </body>
 </html>
