@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria Delizioso - Paras pizza kaupungissa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #d32f2f 0%, #f57c00 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://via.placeholder.com/1200x400') center/cover;
+            color: white;
+            padding: 10rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #d32f2f;
+            color: white;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #b71c1c;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 4rem 2rem;
+            background: #f5f5f5;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #d32f2f;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item h3 {
+            color: #d32f2f;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .menu-item p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #f57c00;
+            font-weight: bold;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: #d32f2f;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #d32f2f 0%, #f57c00 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <div class="logo">🍕 Pizzeria Delizioso</div>
+            <ul>
+                <li><a href="#home">Koti</a></li>
+                <li><a href="#menu">Ruokalista</a></li>
+                <li><a href="#about">Meistä</a></li>
+                <li><a href="#contact">Yhteystieto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div>
+            <h1>Tervetuloa Pizzeria Deliziosoon</h1>
+            <p>Tuoreista ainesosista valmistettu paras pizza kaupungissa</p>
+            <button class="btn" onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})">
+                Katso ruokalista
+            </button>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Meidän Pizza-valikoima</h2>
+            <div class="menu-grid">
+                <!-- Pizza 1 -->
+                <div class="menu-item">
+                    <img src="https://via.placeholder.com/250x200?text=Margherita" alt="Margherita">
+                    <h3>Margherita</h3>
+                    <p>Tomaatti, mozzarella, basilika ja oliivöljy</p>
+                    <div class="price">€8.99</div>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                </div>
+
+                <!-- Pizza 2 -->
+                <div class="menu-item">
+                    <img src="https://via.placeholder.com/250x200?text=Pepperoni" alt="Pepperoni">
+                    <h3>Pepperoni</h3>
+                    <p>Tomaatti, mozzarella ja pepperoni</p>
+                    <div class="price">€9.99</div>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                </div>
+
+                <!-- Pizza 3 -->
+                <div class="menu-item">
+                    <img src="https://via.placeholder.com/250x200?text=Vegetarian" alt="Vegetarian">
+                    <h3>Vegetarian</h3>
+                    <p>Tomaatti, mozzarella, paprika, sipuli ja oliivit</p>
+                    <div class="price">€9.49</div>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                </div>
+
+                <!-- Pizza 4 -->
+                <div class="menu-item">
+                    <img src="https://via.placeholder.com/250x200?text=Quattro+Formaggi" alt="Quattro Formaggi">
+                    <h3>Quattro Formaggi</h3>
+                    <p>Neljä eri juustosorttia: mozzarella, parmesan, gorgonzola ja ricotta</p>
+                    <div class="price">€11.99</div>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                </div>
+
+                <!-- Pizza 5 -->
+                <div class="menu-item">
+                    <img src="https://via.placeholder.com/250x200?text=Carnivore" alt="Carnivore">
+                    <h3>Carnivore</h3>
+                    <p>Lihaista: salaami, kinkku, nauta ja maksa</p>
+                    <div class="price">€12.99</div>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                </div>
+
+                <!-- Pizza 6 -->
+                <div class="menu-item">
+                    <img src="https://via.placeholder.com/250x200?text=Hawaiian" alt="Hawaiian">
+                    <h3>Hawaiian</h3>
+                    <p>Tomaatti, mozzarella, kinkku ja ananas</p>
+                    <div class="price">€10.49</div>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Meistä</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Pizzeria Delizioso</h2>
+                    <p>Olemme olleet palvelemassa lukuisia asiakkaita vuodesta 2015. Jokainen pizza valmistetaan tiimiimme ammattitaidolla ja rakkaudella.</p>
+                    <p>Käytämme vain tuoreimpia ja laadukkainta ainesosaa, jotka tuodaan suoraan Italiasta. Pizza-uunimme on perinteinen puulämmitteinen uuni, joka kuumentaa pizzan täydelliseen lämpötilaan.</p>
+                    <p>Vieraile meillä tänään ja koe oikea italialainen pizza-kokemus!</p>
+                    <button class="btn" style="margin-top: 2rem;">Varaa pöytä</button>
+                </div>
+                <img src="https://via.placeholder.com/400x400?text=Pizzeria" alt="Pizzeria" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Ota yhteyttä</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 Osoite</h3>
+                    <p>Kauppakatu 123<br>Helsinki 00100</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📞 Puhelin</h3>
+                    <p>+358 9 1234 5678</p>
+                </div>
+                <div class="contact-item">
+                    <h3>🕐 Aukioloajat</h3>
+                    <p>Ma-To: 11:00-22:00<br>Pe-Su: 11:00-23:00</p>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <h3 style="margin-bottom: 1.5rem;">Lähetä viesti</h3>
+                <div class="form-group">
+                    <label for="name">Nimi:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Sähköposti:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Viesti:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Lähetä viesti</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Pizzeria Delizioso. Kaikki oikeudet pidätetään.</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Kiitos viestistäsi! Otamme sinuun pian yhteyttä.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
