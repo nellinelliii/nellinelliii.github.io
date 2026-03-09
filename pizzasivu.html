@@ -695,8 +695,17 @@
             saveCart();
             updateCart();
             
-            // Show confirmation
-            alert(name + ' lisätty ostoskoriin!');
+            // Keep cart sidebar visible and show brief notification
+            document.getElementById('cartSidebar').classList.add('active');
+            
+            // Flash animation on cart button
+            const cartToggle = document.getElementById('cartToggle');
+            if (cartToggle) {
+                cartToggle.style.transform = 'scale(1.15)';
+                setTimeout(() => {
+                    cartToggle.style.transform = 'scale(1)';
+                }, 200);
+            }
         }
 
         // Remove from cart
