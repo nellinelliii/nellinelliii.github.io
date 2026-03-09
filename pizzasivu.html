@@ -236,6 +236,214 @@
             min-height: 100px;
         }
 
+        /* Cart Section */
+        .cart-sidebar {
+            position: fixed;
+            right: -350px;
+            top: 80px;
+            width: 350px;
+            height: calc(100vh - 80px);
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s;
+            z-index: 99;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 1rem;
+        }
+
+        .cart-header h3 {
+            color: #d32f2f;
+            margin: 0;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cart-item-price {
+            color: #f57c00;
+        }
+
+        .qty-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .qty-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .qty-btn:hover {
+            background: #d32f2f;
+            color: white;
+        }
+
+        .remove-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .remove-btn:hover {
+            background: #b71c1c;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #999;
+            padding: 2rem 0;
+        }
+
+        .cart-total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #d32f2f;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #d32f2f;
+            text-align: right;
+        }
+
+        .delivery-option {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .delivery-option label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+        }
+
+        .delivery-option input[type="radio"] {
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        .delivery-address {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .delivery-address.active {
+            display: block;
+        }
+
+        .delivery-address input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .cart-button {
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1rem;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .cart-button:hover {
+            background: #b71c1c;
+        }
+
+        .cart-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .cart-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 98;
+            transition: transform 0.3s;
+        }
+
+        .cart-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #f57c00;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
         /* Footer */
         footer {
             background: #222;
@@ -300,7 +508,7 @@
                     <h3>Margherita</h3>
                     <p>Tomaatti, mozzarella, basilika ja oliivöljy</p>
                     <div class="price">€8.99</div>
-                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="addToCart('Margherita', '8.99')">Lisää koriin</button>
                 </div>
 
                 <!-- Pizza 2 -->
@@ -309,7 +517,7 @@
                     <h3>Pepperoni</h3>
                     <p>Tomaatti, mozzarella ja pepperoni</p>
                     <div class="price">€9.99</div>
-                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="addToCart('Pepperoni', '9.99')">Lisää koriin</button>
                 </div>
 
                 <!-- Pizza 3 -->
@@ -318,7 +526,7 @@
                     <h3>Vegetarian</h3>
                     <p>Tomaatti, mozzarella, paprika, sipuli ja oliivit</p>
                     <div class="price">€9.49</div>
-                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="addToCart('Vegetarian', '9.49')">Lisää koriin</button>
                 </div>
 
                 <!-- Pizza 4 -->
@@ -327,7 +535,7 @@
                     <h3>Quattro Formaggi</h3>
                     <p>Neljä eri juustosorttia: mozzarella, parmesan, gorgonzola ja ricotta</p>
                     <div class="price">€11.99</div>
-                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="addToCart('Quattro Formaggi', '11.99')">Lisää koriin</button>
                 </div>
 
                 <!-- Pizza 5 -->
@@ -336,7 +544,7 @@
                     <h3>Carnivore</h3>
                     <p>Lihaista: salaami, kinkku, nauta ja maksa</p>
                     <div class="price">€12.99</div>
-                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="addToCart('Carnivore', '12.99')">Lisää koriin</button>
                 </div>
 
                 <!-- Pizza 6 -->
@@ -345,7 +553,7 @@
                     <h3>Hawaiian</h3>
                     <p>Tomaatti, mozzarella, kinkku ja ananas</p>
                     <div class="price">€10.49</div>
-                    <button class="btn" style="width: 100%; margin-top: 1rem;">Lisää koriin</button>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;" onclick="addToCart('Hawaiian', '10.49')">Lisää koriin</button>
                 </div>
             </div>
         </div>
@@ -406,12 +614,266 @@
         </div>
     </section>
 
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>🛒 Ostoskori</h3>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div id="cartEmpty" class="cart-empty">
+            <p>Ostoskori on tyhjä</p>
+        </div>
+
+        <div id="cartTotalSection" style="display: none;">
+            <div class="delivery-option">
+                <label>
+                    <input type="radio" name="delivery" value="pickup" checked>
+                    <strong>🏪 Nouto</strong>
+                </label>
+                <small>Nouto 30 minuutissa</small>
+            </div>
+
+            <div class="delivery-option">
+                <label>
+                    <input type="radio" name="delivery" value="delivery">
+                    <strong>🚗 Kuljetus</strong>
+                </label>
+                <small>Toimitus 45-60 minuutissa (+€3.00)</small>
+            </div>
+
+            <div class="delivery-address" id="deliveryAddress">
+                <input type="text" id="street" placeholder="Katuosoite" required>
+                <input type="text" id="city" placeholder="Postinumero ja kaupunki" required>
+                <input type="tel" id="phone" placeholder="Puhelinnumero" required>
+            </div>
+
+            <div class="cart-total">
+                <div>Yhteensä: <span id="totalPrice">€0.00</span></div>
+            </div>
+
+            <button class="cart-button" onclick="checkout()">Siirry kasalle</button>
+        </div>
+    </div>
+
+    <!-- Cart Toggle Button -->
+    <button class="cart-toggle" id="cartToggle" onclick="toggleCart()" style="display:none;">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Pizzeria Delizioso. Kaikki oikeudet pidäätetään.</p>
+        <p>&copy; 2024 Pizzeria Delizioso. Kaikki oikeudet pidätetään.</p>
     </footer>
 
     <script>
+        // Shopping Cart System
+        let cart = JSON.parse(localStorage.getItem('pizza-cart')) || [];
+
+        // Initialize cart display
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCart();
+            setupDeliveryOptions();
+        });
+
+        // Add to cart
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: parseFloat(price),
+                    quantity: 1
+                });
+            }
+            saveCart();
+            updateCart();
+            
+            // Show confirmation
+            alert(name + ' lisätty ostoskoriin!');
+        }
+
+        // Remove from cart
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            saveCart();
+            updateCart();
+        }
+
+        // Update quantity
+        function updateQuantity(name, quantity) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity = Math.max(1, quantity);
+                saveCart();
+                updateCart();
+            }
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('pizza-cart', JSON.stringify(cart));
+        }
+
+        // Update cart display
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartEmpty = document.getElementById('cartEmpty');
+            const cartTotalSection = document.getElementById('cartTotalSection');
+            const cartToggle = document.getElementById('cartToggle');
+            const cartCount = document.getElementById('cartCount');
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '';
+                cartEmpty.style.display = 'block';
+                cartTotalSection.style.display = 'none';
+                cartToggle.style.display = 'none';
+                return;
+            }
+
+            cartEmpty.style.display = 'none';
+            cartTotalSection.style.display = 'block';
+            cartToggle.style.display = 'flex';
+
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // Render cart items
+            cartItemsDiv.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">€${(item.price * item.quantity).toFixed(2)}</div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" onclick="updateQuantity('${item.name}', ${item.quantity - 1})">−</button>
+                        <span style="min-width: 25px; text-align: center;">${item.quantity}</span>
+                        <button class="qty-btn" onclick="updateQuantity('${item.name}', ${item.quantity + 1})">+</button>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart('${item.name}')">Poista</button>
+                </div>
+            `).join('');
+
+            updateTotal();
+        }
+
+        // Calculate and display total
+        function updateTotal() {
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryOption = document.querySelector('input[name="delivery"]:checked').value;
+            const deliveryFee = deliveryOption === 'delivery' ? 3.00 : 0;
+            const total = subtotal + deliveryFee;
+
+            document.getElementById('totalPrice').textContent = '€' + total.toFixed(2);
+        }
+
+        // Setup delivery options
+        function setupDeliveryOptions() {
+            const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
+            deliveryRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const deliveryAddress = document.getElementById('deliveryAddress');
+                    if (this.value === 'delivery') {
+                        deliveryAddress.classList.add('active');
+                        // Make fields required
+                        document.getElementById('street').required = true;
+                        document.getElementById('city').required = true;
+                        document.getElementById('phone').required = true;
+                    } else {
+                        deliveryAddress.classList.remove('active');
+                        // Make fields optional
+                        document.getElementById('street').required = false;
+                        document.getElementById('city').required = false;
+                        document.getElementById('phone').required = false;
+                    }
+                    updateTotal();
+                });
+            });
+        }
+
+        // Toggle cart sidebar
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            cartSidebar.classList.toggle('active');
+        }
+
+        // Close cart when clicking outside
+        document.addEventListener('click', function(event) {
+            const cartSidebar = document.getElementById('cartSidebar');
+            const cartToggle = document.getElementById('cartToggle');
+            
+            if (!cartSidebar.contains(event.target) && !cartToggle.contains(event.target)) {
+                cartSidebar.classList.remove('active');
+            }
+        });
+
+        // Checkout function
+        function checkout() {
+            const deliveryOption = document.querySelector('input[name="delivery"]:checked').value;
+            
+            // Validate delivery info if delivery is selected
+            if (deliveryOption === 'delivery') {
+                const street = document.getElementById('street').value.trim();
+                const city = document.getElementById('city').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                
+                if (!street || !city || !phone) {
+                    alert('Täytä kaikki toimitusosoitteen kentät');
+                    return;
+                }
+            }
+
+            // Calculate totals
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = deliveryOption === 'delivery' ? 3.00 : 0;
+            const total = subtotal + deliveryFee;
+
+            // Create order summary
+            let orderSummary = 'TILAUKSEN YHTEENVETO\n';
+            orderSummary += '==================\n\n';
+            
+            cart.forEach(item => {
+                orderSummary += `${item.name}\n`;
+                orderSummary += `  ${item.quantity}x @ €${item.price.toFixed(2)} = €${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+
+            orderSummary += '\n==================\n';
+            orderSummary += `Yhteensä: €${subtotal.toFixed(2)}\n`;
+            
+            if (deliveryOption === 'delivery') {
+                const street = document.getElementById('street').value;
+                const city = document.getElementById('city').value;
+                const phone = document.getElementById('phone').value;
+                
+                orderSummary += `Kuljetus: +€${deliveryFee.toFixed(2)}\n`;
+                orderSummary += `LOPULLINEN SUMMA: €${total.toFixed(2)}\n\n`;
+                orderSummary += `TOIMITUSOSOITE:\n${street}\n${city}\nPuhelin: ${phone}`;
+            } else {
+                orderSummary += `Noutomaksu: €${total.toFixed(2)}\n\n`;
+                orderSummary += 'Nouto 30 minuutissa';
+            }
+
+            // Show order confirmation
+            if (confirm(orderSummary + '\n\nKonfirmoi tilaus?')) {
+                alert('Tilaus vahvistettu! Numerosi: ' + Math.floor(Math.random() * 10000).toString().padStart(4, '0') + '\n\nKiitos tilauksestasi!');
+                
+                // Clear cart
+                cart = [];
+                saveCart();
+                updateCart();
+                
+                // Close cart
+                document.getElementById('cartSidebar').classList.remove('active');
+            }
+        }
+
         function handleSubmit(event) {
             event.preventDefault();
             alert('Kiitos viestistäsi! Otamme sinuun pian yhteyttä.');
