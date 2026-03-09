@@ -643,16 +643,64 @@
             color: white;
         }
 
-        .order-history-container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+        .order-history-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+
+        .order-history-modal.active {
+            display: block;
+        }
+
+        .order-history-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .order-history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 1rem;
+        }
+
+        .order-history-header h2 {
+            color: #d32f2f;
+            margin: 0;
+        }
+
+        .order-history-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .order-history-close:hover {
+            color: #d32f2f;
         }
 
         .order-history-title {
             color: #d32f2f;
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
             text-align: center;
         }
 
@@ -772,22 +820,11 @@
             cursor: pointer;
             font-weight: bold;
             display: block;
-            margin: 2rem auto 0;
+            margin: 1.5rem auto 0;
         }
 
         .clear-history-btn:hover {
             background: #b71c1c;
-        }
-
-        .order-history-section {
-            display: none;
-            background: #f5f5f5;
-            min-height: 100vh;
-            padding: 2rem 0;
-        }
-
-        .order-history-section.active {
-            display: block;
         }
 
         /* Responsive */
@@ -962,14 +999,17 @@
         </div>
     </section>
 
-    <!-- Order History Section -->
-    <section class="order-history-section" id="orderHistory">
-        <div class="order-history-container">
-            <h2 class="order-history-title">📋 Tilaushistoria</h2>
+    <!-- Order History Modal -->
+    <div class="order-history-modal" id="orderHistoryModal">
+        <div class="order-history-content">
+            <div class="order-history-header">
+                <h2>📋 Tilaushistoria</h2>
+                <button class="order-history-close" onclick="closeOrderHistory()">✕</button>
+            </div>
             <div id="orderHistoryContent"></div>
             <button class="clear-history-btn" onclick="clearOrderHistory()" style="display: none;" id="clearBtn">Tyhjennä historia</button>
         </div>
-    </section>
+    </div>
 
     <!-- Custom Pizza Modal -->
     <div id="customPizzaModal" class="modal">
@@ -1461,25 +1501,23 @@
         }
 
         function toggleOrderHistory() {
-            const section = document.getElementById('orderHistory');
-            const allSections = document.querySelectorAll('section');
-
-            // Hide all main sections
-            allSections.forEach(sec => {
-                if (sec !== section) {
-                    sec.style.display = sec.id === 'orderHistory' ? 'block' : 'block';
-                }
-            });
-
-            // Toggle order history
-            if (section.classList.contains('active')) {
-                section.classList.remove('active');
-            } else {
-                section.classList.add('active');
-                displayOrderHistory();
-                section.scrollIntoView({behavior: 'smooth'});
-            }
+            const modal = document.getElementById('orderHistoryModal');
+            displayOrderHistory();
+            modal.classList.add('active');
         }
+
+        function closeOrderHistory() {
+            const modal = document.getElementById('orderHistoryModal');
+            modal.classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('orderHistoryModal');
+            if (event.target === modal) {
+                closeOrderHistory();
+            }
+        });
 
         function clearOrderHistory() {
             if (confirm('Oletko varma että haluat poistaa koko tilaushistorian?')) {
