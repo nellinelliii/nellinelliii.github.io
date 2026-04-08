@@ -127,6 +127,18 @@ nav a:hover::after {
     padding: 2rem;
 }
 
+.opiskelen-text {
+    font-size: 2rem;
+    color: #e0aaff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #c77dff 0%, #e0aaff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 footer {
     background-color: #0a0a0a;
     color: #e0e0e0;
